@@ -96,12 +96,15 @@ export default function LiveDemo() {
   const [logs, setLogs] = useState<LogLine[]>([]);
   const [simStep, setSimStep] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalContainerRef = useRef<HTMLDivElement>(null);
 
-  // Auto scroll terminal logs
+  // Auto scroll terminal logs container directly (does not affect page viewport scroll)
   useEffect(() => {
-    if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (terminalContainerRef.current) {
+      terminalContainerRef.current.scrollTo({
+        top: terminalContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [logs]);
 
@@ -424,7 +427,10 @@ export default function LiveDemo() {
               </div>
 
               {/* Logs Content - Animating items one by one */}
-              <div className="flex-1 space-y-3 overflow-y-auto max-h-[280px] min-h-[220px] pr-2 scrollbar-zinc">
+              <div 
+                ref={terminalContainerRef} 
+                className="flex-1 space-y-3 overflow-y-auto max-h-[280px] min-h-[220px] pr-2 scrollbar-zinc"
+              >
                 <AnimatePresence mode="popLayout">
                   {logs.map((log, index) => {
                     let colorClass = "text-zinc-400";
@@ -447,7 +453,6 @@ export default function LiveDemo() {
                     );
                   })}
                 </AnimatePresence>
-                <div ref={terminalEndRef} />
               </div>
 
               {/* Terminal Bottom Info */}
