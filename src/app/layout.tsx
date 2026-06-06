@@ -60,8 +60,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfair.variable} ${figtree.variable} ${jetbrains.variable} scroll-smooth`}
+      data-scroll-behavior="smooth"
     >
-      <body className="bg-brand-cream text-brand-charcoal font-sans antialiased min-h-screen flex flex-col selection:bg-brand-gold/20 selection:text-brand-charcoal">
+      <body className="bg-brand-cream text-brand-charcoal font-sans antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-gold/20 selection:text-brand-charcoal">
         {children}
       </body>
     </html>

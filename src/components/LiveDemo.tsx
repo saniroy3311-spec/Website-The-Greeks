@@ -313,7 +313,7 @@ export default function LiveDemo() {
   }, [activeTab, simStep]);
 
   return (
-    <section id="work" className="py-24 bg-brand-cream/60 border-t border-brand-border">
+    <section id="demo" className="py-24 bg-brand-cream/60 border-t border-brand-border">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header */}
