@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-brand-cream: #FAFAF7;
+  --color-brand-parchment: #F2F0EB;
+  --color-brand-charcoal: #1A1A1A;
+  --color-brand-gold: #C9A84C;
+  --color-brand-navy: #1B3A5C;
+  --color-brand-green: #2D7D4F;
+  --color-brand-muted: #6B6B6B;
+  --color-brand-border: #E0DDD6;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), sans-serif;
+  --font-mono: var(--font-mono), monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-pulse-slow: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Utilities */
+
+/* Subtle graph paper background pattern */
+.bg-graph-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(224, 221, 214, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(224, 221, 214, 0.15) 1px, transparent 1px);
+}
+
+/* Custom scrollbar matching editorial style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFAF7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E0DDD6;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A84C;
+}
+
+/* Custom CSS animations */
+.line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 2s ease-out forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.terminal-cursor::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: currentColor;
+  }
+}
+
+/* Editorial Blog Styling Rules */
+.blog-article-content {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.blog-article-content p {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  color: #333333;
+}
+
+.blog-article-content h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1B3A5C;
+  margin-top: 2.25rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+
+.blog-article-content h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.blog-article-content code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85em;
+  background-color: #F2F0EB;
+  color: #1A1A1A;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.blog-article-content pre {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background-color: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.blog-article-content pre code {
+  background-color: transparent;
+  color: #f4f4f5;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: block;
+}
+
+.blog-article-content ul {
+  list-style-type: disc;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.blog-article-content ol {
+  list-style-type: decimal;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.blog-article-content li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-article-content table {
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.blog-article-content th {
+  background-color: #F2F0EB;
+  color: #1A1A1A;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #E0DDD6;
+}
+
+.blog-article-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #E0DDD6;
+}
+
+.blog-article-content blockquote {
+  border-left: 4px solid #C9A84C;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #6B6B6B;
+  margin: 1.5rem 0;
 }
